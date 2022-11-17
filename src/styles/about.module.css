@@ -1,0 +1,97 @@
+.mainpoint{
+  background-size: cover;
+  background-image: linear-gradient(rgb(185, 248, 250), rgb(155, 234, 240));
+  width: 100%;
+  height: 90vh;
+  user-select: none;
+}
+
+.title{
+  height: 100%;
+}
+
+.title h1{
+  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+  font-weight: bolder;
+  display: inline;
+}
+.title h2{
+  font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+  font-weight: bolder;
+  display: inline;
+}
+
+
+
+@media only screen and (max-width: 760px) {
+  .titleDes{
+    visibility: hidden;
+  }
+
+  .detailP{
+    word-wrap: break-word;
+    white-space:pre-wrap;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center
+  }
+  .detailP1{
+    word-wrap: break-word;
+    white-space:pre-wrap;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    
+  }
+
+  .circleImage{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+}
+
+@media only screen and (min-width: 761px) {
+  .titleDes{
+    visibility: visible;
+    font-family: 'Chonburi', cursive;
+    font-family: 'Pridi', serif;
+  }
+  .detailP{
+    margin-top: 50px;
+    word-wrap: break-word;
+    white-space:pre-wrap;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center
+  }
+  .detailP1{
+    margin-top: 50px;
+    word-wrap: break-word;
+    white-space:pre-wrap;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center
+    
+  }
+
+  .circleImage{
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+  }
+}
+
+.slider{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: aliceblue;
+}
+
+.silderMain{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: aliceblue;
+}

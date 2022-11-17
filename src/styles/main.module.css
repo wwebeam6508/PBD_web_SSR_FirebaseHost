@@ -1,0 +1,39 @@
+.firstDes{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  user-select: none;
+}
+
+.middleDes{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  user-select: none;
+}
+
+.firstDes h1{
+  text-shadow: 2px 0 0 rgb(0, 0, 0), -2px 0 0 rgb(0, 0, 0), 0 2px 0 rgb(0, 0, 0), 0 -2px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-family: 'Chonburi', cursive;
+font-family: 'Pridi', serif;
+}
+.firstDes h2{
+  text-shadow: 2px 0 0 rgb(0, 0, 0), -2px 0 0 rgb(0, 0, 0), 0 2px 0 rgb(0, 0, 0), 0 -2px 0 rgb(0, 0, 0), 1px 1px rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0);
+  color: azure;
+  font-family: 'Chonburi', cursive;
+  font-family: 'Pridi', serif;
+}
+
+.centerIcon {
+  width: 400px;
+}
+
+.centerIcon p{
+  word-wrap: break-word;
+  white-space:pre-wrap;
+  font-family: fantasy;
+  font-size: 20px;
+  text-align: center
+}

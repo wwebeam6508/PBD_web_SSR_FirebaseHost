@@ -1,0 +1,21 @@
+.realbody{
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgb(221, 254, 255), rgb(205, 230, 231));
+}
+.workBlock{
+    padding-top: 9%;
+    padding-left: 10%;
+    padding-right: 10%;
+    height: 90vh;
+}
+
+.yearTitle{
+    border-top: 3px solid rgb(247, 137, 137);
+}
+
+@media only screen and (max-width: 600px) {
+    .workBlock {
+        padding-top: 60%;
+    }
+  }

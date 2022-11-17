@@ -1,0 +1,96 @@
+/* Small reset */
+
+
+
+.figure {
+  margin: 0;
+  padding: 0;
+}
+
+/* Bootstrap-style v3 columns */
+
+.row {
+    margin-left: auto;
+    margin-right: auto
+}
+.row::after
+.row::before {
+    content: " ";
+    display: table
+}
+.row::after {
+    clear: both
+}
+
+.column { 
+  position: relative;
+  float: left;
+  min-height: 1px;
+  width: 25%;
+  padding-left: 4px;
+  padding-right: 4px;
+  
+  /* Space between tiles */
+  margin-top: 8px;
+}
+@media only screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.sizer {
+  width: 8.33333%;
+}
+
+/* default styles so shuffle doesn't have to set them (it will if they're missing) */
+.my_shuffle {
+  position: relative;
+  overflow: hidden;
+}
+
+.aspect {
+  aspect-ratio: 4 / 3;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo_item {
+  margin-top: 16px;
+}
+
+.photo-attribution {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: inline-block;
+  padding: 4px 6px;
+  border-radius: 3px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.photo-attribution > span {
+  display: inline-block;
+  padding: 2px 3px;
+}
+
+.photo-attribution svg {
+  position: relative;
+  top: -1px;
+  height: 12px;
+  width: auto;
+  vertical-align: middle;
+  fill: white;
+}
