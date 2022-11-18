@@ -21,7 +21,10 @@ export const getWorksData = async (year) => {
             isClickable: resdata.detail || resdata.images ? true : false
         })
     })
-    return works
+    return {
+        works:works,
+        pagination:pagination(year)
+    }
 }
 
 export const getWorkYearsData = async () => {
@@ -30,13 +33,45 @@ export const getWorkYearsData = async () => {
     const workDoc = await getDocs(workCollection)
     let years = []
     workDoc.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data())
         years.push(new Date(doc.data().date.seconds * 1000).getFullYear())
     })
 
     years = years.map(item => item)
     .filter((value, index, self) => self.indexOf(value) === index)
     
+
+
     return years
+}
+
+async function pagination(selectedPage) {
+    const db = getFirestore()
+    const yearCollection = collection(db, 'works')
+    const yearDoc = await getDocs(yearCollection)
+    let years = []
+    yearDoc.forEach((doc) => {
+        years.push(new Date(doc.data().date.seconds * 1000).getFullYear())
+    })
+
+    years = years.map(item => item)
+    .filter((value, index, self) => self.indexOf(value) === index)
+    const pages = years
+    
+    let filPage = []
+    pages.forEach((page,index) => {
+        if(selectedPage === page){
+            if(index === 0){
+                filPage.push(page)
+                filPage.push(pages[index+1])
+            }else if(index === pages.length - 1){
+                filPage.push(pages[index-1])
+                filPage.push(page)
+            }else{
+                filPage.push(pages[index-1])
+                filPage.push(page)
+                filPage.push(pages[index+1])
+            }
+        }
+    })
+    return filPage
 }

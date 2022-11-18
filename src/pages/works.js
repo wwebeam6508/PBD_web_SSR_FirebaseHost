@@ -24,9 +24,9 @@ export default function Works(props) {
                 <link rel="canonical" href='https://pbdsupply.com/works' />
             </Head>
             <div className={styles.realbody} >
-                <div className={styles.workBlock}>
+                <div className={`${styles.workBlock} position-relative`}>
                     <div className={styles.yearTitle}><h4><strong>พ.ศ.{selectYear + 543}</strong></h4></div>
-                    <ul className="list-group list-group-horizontal-sm">
+                    <ul className="list-group list-group-horizontal-md list-group-numbered ">
                         {
                             props.works && props.works.map((work, key)=>{
                                 return(
@@ -42,6 +42,27 @@ export default function Works(props) {
                             })
                         }
                     </ul>
+                    <nav className={`${styles.paginationBttns} position-absolute bottom-0 start-50 translate-middle-x`} aria-label="Page navigation">
+                        <ul className="pagination justify-content-center">
+                            <li className="page-item">
+                            <a className="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                            </li>
+                            {
+                                props.years && props.years.map((year, key)=>{
+                                    return(
+                                        <li key={key} className="page-item"><a className={`page-link ${selectYear === year ? 'active' : ''}`} href="#">{year+543}</a></li>
+                                    )
+                                })
+                            }
+                            <li className="page-item">
+                                <a className="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </>
@@ -52,7 +73,7 @@ export async function getServerSideProps() {
     const yeardata = await getWorkYearsData()
     const res = await getWorksData(yeardata[0])
     const data = res
-    return { props: { works: data, years:yeardata } }
+    return { props: { works: data.works, years:yeardata } }
 }
 
 Works.getLayout = function getLayout(page) {
