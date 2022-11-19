@@ -1,20 +1,25 @@
 
 import 'bootstrap/dist/css/bootstrap.css'
 import Head from 'next/head'
-import Layout from '../components/layout'
-import styles from '../styles/works.module.css'
-import ShuffleImage from '../components/shuffleImage'
-import { getWorksData, getWorkYearsData } from '../fetchData/getWorksData'
+import Layout from '../../components/layout'
+import styles from '../../styles/works.module.css'
+import ShuffleImage from '../../components/shuffleImage'
+import { getWorksData, getWorkYearsData } from '../../fetchData/getWorksData'
 import { useEffect, useState } from 'react'
-
+import { useRouter } from 'next/router';
+ 
 export default function Works(props) {
-
-    const [ selectYear, setSelectYear] = useState()
+    const router = useRouter();
 
     useEffect(()=>{
         async function fetchData() {
+            
             const yeardata = await getWorkYearsData()
-            setSelectYear(yeardata[0])
+            if(yeardata.indexOf(Number(router.query.year)) >= 0){
+                router.replace('/works/'+router.query.year)
+            } else {
+                router.replace('/works/'+yeardata[0])
+            }
         }
         fetchData()
     },[])
@@ -25,7 +30,7 @@ export default function Works(props) {
             </Head>
             <div className={styles.realbody} >
                 <div className={`${styles.workBlock} position-relative`}>
-                    <div className={styles.yearTitle}><h4><strong>พ.ศ.{selectYear + 543}</strong></h4></div>
+                    <div className={styles.yearTitle}><h4><strong>พ.ศ.{Number(router.query.year) + 543}</strong></h4></div>
                     <ul className="list-group list-group-horizontal-md list-group-numbered ">
                         {
                             props.works && props.works.map((work, key)=>{
@@ -42,38 +47,32 @@ export default function Works(props) {
                             })
                         }
                     </ul>
-                    <nav className={`${styles.paginationBttns} position-absolute bottom-0 start-50 translate-middle-x`} aria-label="Page navigation">
+                    <div className={`${styles.paginationBttns} position-absolute bottom-0 start-50 translate-middle-x`} aria-label="Page navigation">
                         <ul className="pagination justify-content-center">
-                            <li className="page-item">
-                            <a className="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                            </li>
                             {
                                 props.years && props.years.map((year, key)=>{
                                     return(
-                                        <li key={key} className="page-item"><a className={`page-link ${selectYear === year ? 'active' : ''}`} href="#">{year+543}</a></li>
+                                        <li key={key} className="page-item"><a onClick={async ()=>{ getWorksByYear(year) }} className={`page-link ${Number(router.query.year) === year ? 'active' : ''}`} href="#">พ.ศ.{year+543}</a></li>
                                     )
                                 })
                             }
-                            <li className="page-item">
-                                <a className="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
                         </ul>
-                    </nav>
+                    </div>
                 </div>
             </div>
         </>
     )
+
+    async function getWorksByYear(year){
+        router.replace('/works/'+year)
+    }
 }
 
-export async function getServerSideProps() {
-    const yeardata = await getWorkYearsData()
-    const res = await getWorksData(yeardata[0])
+export async function getServerSideProps(context) {
+    console.log(context.query.year)
+    const res = await getWorksData(Number(context.query.year))
     const data = res
-    return { props: { works: data.works, years:yeardata } }
+    return { props: { works: data.works, years:data.pagination } }
 }
 
 Works.getLayout = function getLayout(page) {

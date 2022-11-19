@@ -23,7 +23,7 @@ export const getWorksData = async (year) => {
     })
     return {
         works:works,
-        pagination:pagination(year)
+        pagination: await pagination(year)
     }
 }
 
@@ -45,17 +45,7 @@ export const getWorkYearsData = async () => {
 }
 
 async function pagination(selectedPage) {
-    const db = getFirestore()
-    const yearCollection = collection(db, 'works')
-    const yearDoc = await getDocs(yearCollection)
-    let years = []
-    yearDoc.forEach((doc) => {
-        years.push(new Date(doc.data().date.seconds * 1000).getFullYear())
-    })
-
-    years = years.map(item => item)
-    .filter((value, index, self) => self.indexOf(value) === index)
-    const pages = years
+    const pages = await getWorkYearsData()
     
     let filPage = []
     pages.forEach((page,index) => {

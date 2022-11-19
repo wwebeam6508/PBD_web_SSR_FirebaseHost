@@ -42,7 +42,7 @@ function NavBar() {
                 <Link href="/about" scroll={true}>
                     <a style={styles.tabtitle} className={`nav-link ${router.asPath === '/about' ? 'active': ''}`}>เกี่ยวกับเรา</a>
                 </Link>
-                <Link href="/works" scroll={true}>
+                <Link href={`/works/1`} scroll={true}>
                     <a style={styles.tabtitle} className={`nav-link ${router.asPath === '/works' ? 'active': ''}`}>ผลงานของเรา</a>
                 </Link>
                 <Link href="/contact" scroll={true}>
