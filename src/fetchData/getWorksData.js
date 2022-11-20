@@ -53,13 +53,25 @@ async function pagination(selectedPage) {
             if(index === 0){
                 filPage.push(page)
                 filPage.push(pages[index+1])
+                if(pages[index+1] !== pages[pages.length - 1]){
+                    filPage.push('...')
+                }
             }else if(index === pages.length - 1){
+                if(pages[index-1] !== pages[0]){
+                    filPage.push('...')
+                }
                 filPage.push(pages[index-1])
                 filPage.push(page)
             }else{
+                if(pages[index-1] !== pages[0]){
+                    filPage.push('...')
+                }
                 filPage.push(pages[index-1])
                 filPage.push(page)
                 filPage.push(pages[index+1])
+                if(pages[index+1] !== pages[pages.length - 1]){
+                    filPage.push('...')
+                }
             }
         }
     })
