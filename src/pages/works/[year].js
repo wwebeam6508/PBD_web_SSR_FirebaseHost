@@ -69,7 +69,6 @@ export default function Works(props) {
 }
 
 export async function getServerSideProps(context) {
-    console.log(context.query.year)
     const res = await getWorksData(Number(context.query.year))
     const data = res
     return { props: { works: data.works, years:data.pagination } }

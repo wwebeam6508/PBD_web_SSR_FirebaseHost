@@ -52,14 +52,14 @@ async function pagination(selectedPage) {
         if(selectedPage === page){
             if(index === 0){
                 filPage.push(page)
-                filPage.push(pages[index+1])
+                if(pages[index+1])filPage.push(pages[index+1])
             }else if(index === pages.length - 1){
-                filPage.push(pages[index-1])
+                if(pages[index-1])filPage.push(pages[index-1])
                 filPage.push(page)
             }else{
-                filPage.push(pages[index-1])
+                if(pages[index-1])filPage.push(pages[index-1])
                 filPage.push(page)
-                filPage.push(pages[index+1])
+                if(pages[index+1])filPage.push(pages[index+1])
             }
         }
     })
