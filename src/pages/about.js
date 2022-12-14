@@ -24,7 +24,7 @@ export default function About(props) {
                         <div className={styles.realbody}>
                             <div className={aboutStyle.mainpoint}>
                                 <div className="container-fluid row align-items-center h-100">
-                                    <div className="col-md-6 mx-auto text-center" style={{marginTop:"150px "}}>
+                                    <div className="col-md-6 mx-auto text-center" style={{paddingTop:"230px"}}>
                                         <h1 className={aboutStyle.titleDes}>ห้างหุ้นส่วนจำกัด พีบีดี ซัพพลาย</h1>
                                         <h2 className={aboutStyle.titleDes}>( PBD Supply Part., Ltd. )</h2>
                                         <p className={aboutStyle.detailP}>

@@ -49,13 +49,18 @@ export default function Works(props) {
                     </ul>
                     <div className={`${styles.paginationBttns} position-absolute bottom-0 start-50 translate-middle-x`} aria-label="Page navigation">
                         <ul className="pagination justify-content-center">
+                        <li className="page-item"><a onClick={async ()=>{ getWorksByYear(props.years[0]) }} className={`page-link ${Number(router.query.year) === props.years[0] ? 'active' : ''}`} href="#">ปีล่าสุด</a></li>
                             {
                                 props.years && props.years.map((year, key)=>{
                                     return(
+                                        year !== '...' ?
                                         <li key={key} className="page-item"><a onClick={async ()=>{ getWorksByYear(year) }} className={`page-link ${Number(router.query.year) === year ? 'active' : ''}`} href="#">พ.ศ.{year+543}</a></li>
+                                        :
+                                        <li key={key} className="page-item">{year}</li>
                                     )
                                 })
                             }
+                            <li className="page-item"><a onClick={async ()=>{ getWorksByYear(props.years[props.years.length - 1]) }} className={`page-link ${Number(router.query.year) === props.years[props.years.length - 1] ? 'active' : ''}`} href="#">ปีท้ายสุด</a></li>
                         </ul>
                     </div>
                 </div>
