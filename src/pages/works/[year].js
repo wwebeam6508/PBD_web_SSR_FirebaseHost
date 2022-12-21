@@ -1,11 +1,9 @@
 
-import 'bootstrap/dist/css/bootstrap.css'
 import Head from 'next/head'
 import Layout from '../../components/layout'
 import styles from '../../styles/works.module.css'
-import ShuffleImage from '../../components/shuffleImage'
 import { getWorksData, getWorkYearsData } from '../../fetchData/getWorksData'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router';
  
 export default function Works(props) {

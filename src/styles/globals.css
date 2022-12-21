@@ -28,7 +28,10 @@ body {
 /*
  * Header
  */
-.nav-masthead .nav-link {
+body{
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+ .nav-masthead .nav-link {
   color: rgba(255, 255, 255, 1);
   border-bottom: .25rem solid transparent;
 }

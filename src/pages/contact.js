@@ -1,5 +1,4 @@
 
-import 'bootstrap/dist/css/bootstrap.css'
 import Head from 'next/head'
 import Layout from '../components/layout'
 import styles from '../styles/Home.module.css'
