@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux'
+
+import { combineReducers } from '@reduxjs/toolkit'
 import { authSlice } from './reducers/auth/slice.js'
 
 const rootReducer = combineReducers({
