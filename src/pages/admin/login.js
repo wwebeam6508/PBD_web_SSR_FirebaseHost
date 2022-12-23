@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../../redux/reducers/auth/action'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-const MySwal = withReactContent(Swal)
 export default function Login(props) {
     const dispatch = useDispatch()
     const [ username, setUsername ] = useState('')
@@ -45,12 +42,6 @@ export default function Login(props) {
     )
 
     async function signIn() {
-        dispatch(login(username, password)).catch((error) => {
-            MySwal.fire({
-                icon: 'error',
-                title: 'เกิดข้อผิดพลาด',
-                text: error
-            })
-        });
+        dispatch(login(username, password))
     }
 }

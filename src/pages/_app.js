@@ -9,15 +9,18 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import {store} from '../redux/index.js'
 import { Provider } from 'react-redux'
 import 'sweetalert2/src/sweetalert2.scss'
+import ErrorBoundary from '../components/ErrorBoundary'
 config.autoAddCss = false
 function MyApp({ Component, pageProps }) {
   createFirebaseApp()
   const getLayout = Component.getLayout || ((page) => page)
 
   return getLayout(
+    <ErrorBoundary>
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>
+    </ErrorBoundary>
   )
 }
 
