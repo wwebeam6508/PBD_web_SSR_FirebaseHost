@@ -1,14 +1,17 @@
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { logout } from "../redux/reducers/auth/action";
 const MySwal = withReactContent(Swal)
 
 const Error = ({ errorCode, errorMessage }) => {
-
+    const dispatch = useDispatch();
     switch (errorCode) {
         case 400:
             errorShow('Bad Request', errorMessage)
             break;
         case 401:
+            dispatch(logout())
             errorShow('Access denied', errorMessage)
             break;
         case 403:
