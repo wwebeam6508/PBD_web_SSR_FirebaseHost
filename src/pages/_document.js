@@ -8,7 +8,6 @@ export default function Document() {
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       </Head>
       <body className="bg-white">
-        
         <Main />
         <NextScript />
       </body>

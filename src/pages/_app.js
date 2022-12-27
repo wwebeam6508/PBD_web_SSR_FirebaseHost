@@ -10,16 +10,19 @@ import {store} from '../redux/index.js'
 import { Provider } from 'react-redux'
 import 'sweetalert2/src/sweetalert2.scss'
 import ErrorBoundary from '../components/ErrorBoundary'
+import { LoadingProvider } from '../context/loadingProvider'
+
 config.autoAddCss = false
 function MyApp({ Component, pageProps }) {
   createFirebaseApp()
   const getLayout = Component.getLayout || ((page) => page)
-
   return getLayout(
     <ErrorBoundary>
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
+        <Provider store={store}>
+          <LoadingProvider>
+            <Component {...pageProps} />
+          </LoadingProvider>
+        </Provider>
     </ErrorBoundary>
   )
 }
