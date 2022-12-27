@@ -1,5 +1,5 @@
 
-import { RingLoader } from 'react-spinners'
+import { MoonLoader } from 'react-spinners'
 import loadingSCSS from '../styles/loading.module.scss'
 export default function LoadingComponent() {
     const override = {
@@ -10,11 +10,11 @@ export default function LoadingComponent() {
     const color = "#36d7b7"
     return (
         <div className={loadingSCSS.main}>
-            <RingLoader
+            <MoonLoader
                 color={color}
                 loading={true}
                 cssOverride={override}
-                speedMultiplier={5}
+                speedMultiplier={1.5}
                 size={150}
                 aria-label="Loading Spinner"
                 data-testid="loader"
