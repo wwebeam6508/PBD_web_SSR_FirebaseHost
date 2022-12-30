@@ -7,18 +7,25 @@ export const login = (username, password) => async (dispatch) => {
     localStorage.setItem('user', JSON.stringify(response.data.data))
     dispatch(setAuth(response.data.data))
   } catch (error) {
-    const errorRes = error.response.data.error
-    errorHandler({ errorCode: errorRes.code, errorMessage: errorRes.message})
+    erroHandle(error)
   }
 }
-  
+
 export const logout = () => async (dispatch) => {
   try {
     await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`)
     localStorage.removeItem('user')
     dispatch(setLogout())
   } catch (error) {
+    erroHandle(error)
+  }
+}
+
+function erroHandle(error) {
+  if (error.response) {
     const errorRes = error.response.data.error
-    errorHandler({ errorCode: errorRes.code, errorMessage: errorRes.message})
+    errorHandler({ errorCode: errorRes.code, errorMessage: errorRes.message })
+  } else {
+    errorHandler({ errorCode: 500, errorMessage: "Internal Server Error" })
   }
 }

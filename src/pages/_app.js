@@ -6,11 +6,12 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import {store} from '../redux/index.js'
+import { store } from '../redux/index.js'
 import { Provider } from 'react-redux'
 import 'sweetalert2/src/sweetalert2.scss'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { LoadingProvider } from '../context/loadingProvider'
+import Init from './init'
 
 config.autoAddCss = false
 function MyApp({ Component, pageProps }) {
@@ -18,11 +19,11 @@ function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page)
   return getLayout(
     <ErrorBoundary>
-        <Provider store={store}>
-          <LoadingProvider>
-            <Component {...pageProps} />
-          </LoadingProvider>
-        </Provider>
+      <Provider store={store}>
+        <LoadingProvider>
+          <Init Component={Component} pageProps={pageProps} />
+        </LoadingProvider>
+      </Provider>
     </ErrorBoundary>
   )
 }

@@ -1,0 +1,8 @@
+.main {
+  /* display: flex; */
+  background-color: white;
+}
+
+.main>section {
+  padding-left: 5px;
+}
