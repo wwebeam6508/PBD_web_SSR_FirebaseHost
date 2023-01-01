@@ -51,3 +51,38 @@ body{
   border-bottom-color: rgb(230, 230, 230);
 }
 
+.sidebar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: #fff;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 991px) {
+    width: 100%;
+  }
+}
+
+.sidebar-toggle {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .sidebar-fixed {
+    display: none;
+  }
+  .sidebar-toggle {
+    display: block;
+  }
+}
+
+@media (min-width: 992px) {
+  .sidebar-fixed {
+    display: block;
+  }
+  .sidebar-toggle {
+    display: none;
+  }
+}

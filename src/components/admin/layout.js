@@ -1,4 +1,4 @@
-import styles from './layout.module.css'
+import styles from './styles/layout.module.css'
 import React from 'react'
 import Sidebar from './sidebar.js'
 import { Provider } from 'react-redux'
