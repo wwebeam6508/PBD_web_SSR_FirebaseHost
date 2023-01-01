@@ -1,18 +1,21 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-page-custom-font */
 
 import Head from 'next/head'
 import Layout from '../components/layout'
 import styles from '../styles/Home.module.css'
 import contactStyles from '../styles/contact.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faLocation, faContactCard} from '@fortawesome/free-solid-svg-icons'
+import { faLocation, faContactCard } from '@fortawesome/free-solid-svg-icons'
 export default function Contact() {
     return (
         <>
             <Head>
                 <link rel="canonical" href='https://pbdsupply.com/contact' />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
-                <link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Pridi&display=swap" rel="stylesheet"/>
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+                <link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Pridi&display=swap" rel="stylesheet" />
             </Head>
             <div className={styles.realbody}>
                 <div className={contactStyles.mainpoint}>
@@ -49,4 +52,4 @@ Contact.getLayout = function getLayout(page) {
             </Layout>
         </>
     )
-  }
+}

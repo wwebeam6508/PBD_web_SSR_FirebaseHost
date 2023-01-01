@@ -19,7 +19,7 @@ function Sidebar(props) {
   }
 
   const handleResize = () => {
-    if(window.innerWidth >= 768) {
+    if (window.innerWidth >= 768) {
       setIsOpen(true)
     } else {
       setIsOpen(false)
@@ -28,31 +28,29 @@ function Sidebar(props) {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', handleResize);
     }
   }, [])
-  
+
   return (
     <>
-      <MDBNavbarLink  onClick={toggleSidebar}>Toggle Sidebar</MDBNavbarLink >
-      <div className='sidebar-fixed position-fixed'>
-        <a className="logo-wrapper waves-effect">
-          <img alt="MDB React Logo" className="img-fluid" src="/images/logo.png" />
-        </a>
-        <MDBListGroup  className="list-group-flush">
-          {
-            isOpen && 
-            <MDBListGroupItem>
-              <MDBNavbarLink  active={router.pathname === '/dashboard'} className="waves-effect" >
-                <MDBIcon fas icon="chart-pie" className="me-3" />
-                Dashboard
-              </MDBNavbarLink>
-            </MDBListGroupItem>
-          }
-        </MDBListGroup>
-      </div>
+      <MDBNavbarLink className='sidebar-toggle' onClick={toggleSidebar}>Open Sidebar</MDBNavbarLink >
+      {
+        isOpen && (
+          <div className='sidebar-fixed position-fixed'>
+            <MDBListGroup className="list-group-flush">
+              <MDBNavbarLink className='sidebar-toggle' onClick={toggleSidebar}>Close Sidebar</MDBNavbarLink >
+              <MDBListGroupItem>
+                <MDBNavbarLink active={router.pathname === '/dashboard'} className="waves-effect" >
+                  <MDBIcon fas icon="chart-pie" className="me-3" />
+                  Dashboard
+                </MDBNavbarLink>
+              </MDBListGroupItem>
+            </MDBListGroup>
+          </div>
+        )
+      }
     </>
   )
 }
