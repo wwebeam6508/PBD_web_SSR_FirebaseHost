@@ -15,20 +15,25 @@ import { login } from '../../redux/reducers/auth/action'
 import { isEmpty } from '../../util/helper';
 import { store } from '../../redux/index.js'
 import { useRouter } from 'next/router';
-import useBeforeRender from '../../util/useBeforeRender';
 export default function Login(props) {
     const router = useRouter()
     const { setLoading } = useContext(LoadingContext)
     const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [isLoaded, setIsLoaded] = useState(false)
     const state = store.getState()
     useEffect(() => {
         if (state.auth.isAuthenticated) {
             router.push('/admin/dashboard')
+        } else {
+            setIsLoaded(true)
         }
     }, [router, state.auth.isAuthenticated])
 
+    if (!isLoaded) {
+        return <></>
+    }
     return (
         <>
             <section className="vh-100" >
@@ -56,9 +61,6 @@ export default function Login(props) {
     async function signIn() {
         setLoading(true)
         dispatch(login(username, password)).then((res) => {
-            if (res) {
-                console.log(res)
-            }
             setLoading(false)
         })
     }
