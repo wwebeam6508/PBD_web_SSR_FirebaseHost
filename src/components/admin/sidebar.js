@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { logout } from '../../redux/reducers/auth/action'
 import { store } from '../../redux/index.js'
 import { useDispatch } from 'react-redux'
+import { getMenuData } from '../../fetchData/admin/getMenuData'
 
 function Sidebar(props) {
   const router = useRouter()
@@ -27,10 +28,15 @@ function Sidebar(props) {
   }
 
   useEffect(() => {
+    async function init() {
+      await getMenu()
+    }
+    init()
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
     }
+
   }, [])
 
   return (
@@ -53,6 +59,14 @@ function Sidebar(props) {
       }
     </>
   )
+
+  async function getMenu() {
+    await getMenuData().then((res) => {
+      console.log(res.data)
+    }).catch((err) => {
+      console.error(err)
+    })
+  }
 }
 
 export default Sidebar

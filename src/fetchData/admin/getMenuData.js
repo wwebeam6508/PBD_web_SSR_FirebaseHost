@@ -6,10 +6,10 @@ import { errorHandle } from '../../util/helper'
 
 export const getMenuData = async () => {
     const requestOption = {
-        headers: headers
+        headers: headers()
     }
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/menu`, requestOption)
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/menu/get`, requestOption)
         return response.data
     } catch (error) {
         await errorHandle(error)

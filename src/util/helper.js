@@ -1,6 +1,11 @@
-import { useDispatch } from 'react-redux'
+
+
+import { applyMiddleware } from '@reduxjs/toolkit'
+import { createStoreHook } from 'react-redux'
+import thunk from 'redux-thunk'
 import { store } from '../redux'
-import { setAuth } from '../redux/reducers/auth/slice'
+import { refreshToken } from '../redux/reducers/auth/action'
+import rootReducer from '../redux/rootReducer'
 import errorHandler from './errorHandler'
 import headers from './headers'
 
@@ -45,23 +50,15 @@ async function requestAgain(config) {
 }
 
 async function refreshTokenRequest() {
-    const state = store.getState()
-    const dispatch = useDispatch()
-    const requestOption = {
-        headers: {
-            "content-type": "application/json",
-            "Accept": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Connection": "keep-alive",
-            "Request-Timeout": "60000"
-        }
-    }
+    const store = createStoreHook(rootReducer, applyMiddleware(thunk))
+    const dispatch = store.dispatch
+    const refreshToken = JSON.parse(localStorage.getItem('user')).refreshToken
+    if (refreshToken == null) { return false }
     try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/refreshtoken`, {
-            "refreshToken": state.auth.refreshToken
+            "refreshToken": refreshToken
         }, requestOption)
-        let userAuth = localStorage.getItem('user')
-        userAuth = JSON.parse(userAuth)
+        let userAuth = JSON.parse(localStorage.getItem('user'))
         userAuth.accessToken = res.data.data.accessToken
         userAuth.refreshToken = res.data.data.refreshToken
         localStorage.setItem('user', JSON.stringify(userAuth))
