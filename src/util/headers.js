@@ -7,7 +7,6 @@ export default function headers() {
         "Authorization": accessToken,
         "Accept": "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Connection": "keep-alive",
         "Request-Timeout": "60000"
     }
 }

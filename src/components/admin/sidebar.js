@@ -61,11 +61,7 @@ function Sidebar(props) {
   )
 
   async function getMenu() {
-    await getMenuData().then((res) => {
-      console.log(res.data)
-    }).catch((err) => {
-      console.error(err)
-    })
+   console.log(await getMenuData())
   }
 }
 

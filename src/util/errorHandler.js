@@ -122,7 +122,7 @@ const Error = ({ errorCode, errorMessage }) => {
             errorShow('Network Authentication Required', errorMessage)
             break
         default:
-            errorShow(500, 'เกิดข้อผิดพลาดบางอย่าง')
+            errorShow(500, errorMessage ? errorMessage :'เกิดข้อผิดพลาดบางอย่าง')
             break;
     }
 };

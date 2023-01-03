@@ -14,16 +14,17 @@ export function isEmpty(str) {
 }
 
 export async function errorHandle(error) {
-    if (error.response) {
+    console.log(error)
+    if (error.response.data.error) {
         const errorRes = error.response.data.error
-        if (errorRes.code === 401) {
+        if (errorRes.code === 401 && errorRes.data.error) {
             if (await refreshTokenRequest()) {
                 return await requestAgain(error.config)
             }
         }
         errorHandler({ errorCode: errorRes.code, errorMessage: errorRes.message })
     } else {
-        errorHandler({ errorCode: 500, errorMessage: "Internal Server Error" })
+        errorHandler({ errorCode: error.code ? error.code : 500, errorMessage: error.message ? error.message : 'Unknown Error'})
     }
 }
 

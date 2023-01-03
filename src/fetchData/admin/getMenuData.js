@@ -12,6 +12,7 @@ export const getMenuData = async () => {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/menu/get`, requestOption)
         return response.data
     } catch (error) {
+        console.log(error)
         await errorHandle(error)
     }
 }
