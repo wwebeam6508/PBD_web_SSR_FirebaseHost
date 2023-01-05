@@ -7,10 +7,8 @@ import { store } from '../../redux/index.js'
 function LayoutAdmin({ children }) {
     return (
         <React.Fragment>
-            <Provider store={store}>
-                <Sidebar />
-                <main className={styles.main}>{children}</main>
-            </Provider>
+            <Sidebar />
+            <main className={styles.main}>{children}</main>
         </React.Fragment>
     )
 }

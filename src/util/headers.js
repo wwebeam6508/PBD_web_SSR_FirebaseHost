@@ -1,6 +1,7 @@
 import errorHandler from "./errorHandler"
 export default function headers() {
-    const accessToken = JSON.parse(localStorage.getItem('user')).accessToken
+    const user = JSON.parse(localStorage.getItem('user'))
+    const accessToken = user ? user.accessToken : null
     if (accessToken == null) return errorHandler({ errorCode: 500, errorMessage: "Dont Have AccessToken" })
     return {
         "content-type": "application/json",

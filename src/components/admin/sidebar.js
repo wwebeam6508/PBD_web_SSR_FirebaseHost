@@ -6,13 +6,11 @@ import { MDBIcon, MDBListGroup, MDBListGroupItem, MDBNavbarLink } from 'mdb-reac
 import { useRouter } from 'next/router'
 import { logout } from '../../redux/reducers/auth/action'
 import { store } from '../../redux/index.js'
-import { useDispatch } from 'react-redux'
 import { getMenuData } from '../../fetchData/admin/getMenuData'
 
 function Sidebar(props) {
   const router = useRouter()
   const state = store.getState()
-  const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -52,6 +50,10 @@ function Sidebar(props) {
                   <MDBIcon fas icon="chart-pie" className="me-3" />
                   Dashboard
                 </MDBNavbarLink>
+                <MDBNavbarLink onClick={signOut} className="waves-effect" >
+                  <MDBIcon fas icon="chart-pie" className="me-3" />
+                  Sign Out
+                </MDBNavbarLink>
               </MDBListGroupItem>
             </MDBListGroup>
           </div>
@@ -59,6 +61,14 @@ function Sidebar(props) {
       }
     </>
   )
+
+  async function signOut() {
+    const userID = state.auth.user.userProfile.userID
+    console.log(userID)
+    store.dispatch(logout({userID: userID})).then((res) => {
+      console.log(res)
+    })
+  }
 
   async function getMenu() {
    console.log(await getMenuData())

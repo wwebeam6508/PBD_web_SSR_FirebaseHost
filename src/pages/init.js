@@ -1,22 +1,21 @@
 import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { store } from "../redux"
 import { setAuth } from "../redux/reducers/auth/slice"
 import useBeforeRender from "../util/useBeforeRender"
 
 export default function Init({ Component, pageProps }) {
 
-    const dispatch = useDispatch()
 
-    useBeforeRender(() => {
+    useEffect(() => {
         if (typeof window !== 'undefined') {
             // Perform localStorage action
             const user = localStorage.getItem('user')
             if (user) {
                 const auth = JSON.parse(user)
-                dispatch(setAuth(auth))
+                store.dispatch(setAuth(auth))
             }
         }
-    }, [dispatch])
+    }, [store])
 
     return (
         <Component {...pageProps} />

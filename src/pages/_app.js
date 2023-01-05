@@ -18,13 +18,13 @@ function MyApp({ Component, pageProps }) {
   createFirebaseApp()
   const getLayout = Component.getLayout || ((page) => page)
   return getLayout(
-    <ErrorBoundary>
-      <Provider store={store}>
-        <LoadingProvider>
-          <Init Component={Component} pageProps={pageProps} />
-        </LoadingProvider>
-      </Provider>
-    </ErrorBoundary>
+    <Provider store={store}>
+      <ErrorBoundary>
+          <LoadingProvider>
+            <Init Component={Component} pageProps={pageProps} />
+          </LoadingProvider>
+      </ErrorBoundary>
+    </Provider>
   )
 }
 

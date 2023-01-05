@@ -11,9 +11,9 @@ export const login = (username, password) => async (dispatch) => {
   }
 }
 
-export const logout = () => async (dispatch) => {
+export const logout = ({userID}) => async (dispatch) => {
   try {
-    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`)
+    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,{userID})
     localStorage.removeItem('user')
     dispatch(setLogout())
   } catch (error) {

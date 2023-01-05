@@ -18,7 +18,6 @@ import { useRouter } from 'next/router';
 export default function Login(props) {
     const router = useRouter()
     const { setLoading } = useContext(LoadingContext)
-    const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [isLoaded, setIsLoaded] = useState(false)
@@ -60,7 +59,7 @@ export default function Login(props) {
 
     async function signIn() {
         setLoading(true)
-        dispatch(login(username, password)).then((res) => {
+        store.dispatch(login(username, password)).then((res) => {
             setLoading(false)
         })
     }

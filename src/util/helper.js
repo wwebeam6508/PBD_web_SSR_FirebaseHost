@@ -1,11 +1,8 @@
 
 
-import { applyMiddleware } from '@reduxjs/toolkit'
-import { createStoreHook } from 'react-redux'
-import thunk from 'redux-thunk'
+
+
 import { store } from '../redux'
-import { refreshToken } from '../redux/reducers/auth/action'
-import rootReducer from '../redux/rootReducer'
 import errorHandler from './errorHandler'
 import headers from './headers'
 
@@ -14,10 +11,9 @@ export function isEmpty(str) {
 }
 
 export async function errorHandle(error) {
-    console.log(error)
     if (error.response.data.error) {
         const errorRes = error.response.data.error
-        if (errorRes.code === 401 && errorRes.data.error) {
+        if (errorRes.code === 401) {
             if (await refreshTokenRequest()) {
                 return await requestAgain(error.config)
             }
@@ -51,7 +47,6 @@ async function requestAgain(config) {
 }
 
 async function refreshTokenRequest() {
-    const store = createStoreHook(rootReducer, applyMiddleware(thunk))
     const dispatch = store.dispatch
     const refreshToken = JSON.parse(localStorage.getItem('user')).refreshToken
     if (refreshToken == null) { return false }

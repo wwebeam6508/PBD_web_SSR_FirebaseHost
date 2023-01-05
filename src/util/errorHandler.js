@@ -1,7 +1,10 @@
-import { store } from '../redux/index.js'
+
+import { configureStore } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { logout } from "../redux/reducers/auth/action";
+import rootReducer from "../redux/rootReducer";
 const MySwal = withReactContent(Swal)
 
 const Error = ({ errorCode, errorMessage }) => {
@@ -10,7 +13,6 @@ const Error = ({ errorCode, errorMessage }) => {
             errorShow('Bad Request', errorMessage)
             break;
         case 401:
-            store.dispatch(logout)
             errorShow('Access denied', errorMessage)
             break;
         case 403:
@@ -128,6 +130,14 @@ const Error = ({ errorCode, errorMessage }) => {
 };
 
 function errorShow(errorCode, errorMessage) {
+    // if(errorCode === 401) {
+    //     const store = configureStore({
+    //         reducer: rootReducer,
+    //         middleware: [thunk]
+    //     })
+    //     const dispatch = store.dispatch
+    //     dispatch(logout)
+    // }
     MySwal.fire({
         icon: 'error',
         title: errorCode,
