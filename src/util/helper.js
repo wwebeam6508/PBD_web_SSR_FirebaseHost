@@ -2,6 +2,7 @@
 
 
 
+import Router from 'next/router'
 import { store } from '../redux'
 import errorHandler from './errorHandler'
 import headers from './headers'
@@ -11,14 +12,16 @@ export function isEmpty(str) {
 }
 
 export async function errorHandle(error) {
-    if (error.response.data.error) {
-        const errorRes = error.response.data.error
-        if (errorRes.code === 401) {
-            if (await refreshTokenRequest()) {
-                return await requestAgain(error.config)
+    if(error.response){
+        if (error.response.data.error) {
+            const errorRes = error.response.data.error
+            if (errorRes.code === 401) {
+                if (await refreshTokenRequest()) {
+                    return await requestAgain(error.config)
+                }
             }
+            errorHandler({ errorCode: errorRes.code, errorMessage: errorRes.message })
         }
-        errorHandler({ errorCode: errorRes.code, errorMessage: errorRes.message })
     } else {
         errorHandler({ errorCode: error.code ? error.code : 500, errorMessage: error.message ? error.message : 'Unknown Error'})
     }
@@ -47,9 +50,10 @@ async function requestAgain(config) {
 }
 
 async function refreshTokenRequest() {
-    const dispatch = store.dispatch
-    const refreshToken = JSON.parse(localStorage.getItem('user')).refreshToken
-    if (refreshToken == null) { return false }
+    const userAuth = JSON.parse(localStorage.getItem('user'))
+    if(userAuth == null) {
+        return false
+    } else if( userAuth.refreshToken == null) return false
     try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/refreshtoken`, {
             "refreshToken": refreshToken
@@ -58,7 +62,7 @@ async function refreshTokenRequest() {
         userAuth.accessToken = res.data.data.accessToken
         userAuth.refreshToken = res.data.data.refreshToken
         localStorage.setItem('user', JSON.stringify(userAuth))
-        dispatch(setAuth(userAuth))
+        store.dispatch(setAuth(userAuth))
         return true
     } catch (error) {
         return false

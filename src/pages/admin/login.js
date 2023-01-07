@@ -9,26 +9,26 @@ import {
 }
     from 'mdb-react-ui-kit';
 import React, { useContext, useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { LoadingContext } from '../../context/loadingProvider';
 import { login } from '../../redux/reducers/auth/action'
 import { isEmpty } from '../../util/helper';
 import { store } from '../../redux/index.js'
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 export default function Login(props) {
     const router = useRouter()
     const { setLoading } = useContext(LoadingContext)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [isLoaded, setIsLoaded] = useState(false)
-    const state = store.getState()
+    const stateAuth = useSelector(state => state.auth)
     useEffect(() => {
-        if (state.auth.isAuthenticated) {
+        if (stateAuth.isAuthenticated) {
             router.push('/admin/dashboard')
         } else {
             setIsLoaded(true)
         }
-    }, [router, state.auth.isAuthenticated])
+    }, [router, stateAuth])
 
     if (!isLoaded) {
         return <></>
@@ -41,6 +41,7 @@ export default function Login(props) {
                         <MDBCol col='12'>
                             <MDBCard className='bg-dark text-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '400px' }}>
                                 <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
+                                
                                     <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                                     <p className="text-white-50 mb-5">กรุณาใส่รหัสและพาสเวิร์ด!</p>
                                     <MDBInput value={username} onChange={(e) => { setUsername(e.target.value) }} wrapperClass='mb-4 mx-5' labelClass='text-white' label='Email address' type='email' size="lg" />
@@ -59,7 +60,7 @@ export default function Login(props) {
 
     async function signIn() {
         setLoading(true)
-        store.dispatch(login(username, password)).then((res) => {
+        store.dispatch(login(username, password)).then(() => {
             setLoading(false)
         })
     }

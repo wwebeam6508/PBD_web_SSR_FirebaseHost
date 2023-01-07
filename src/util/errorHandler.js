@@ -1,10 +1,9 @@
 
-import { configureStore } from "@reduxjs/toolkit";
-import thunk from "redux-thunk";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { store } from "../redux";
 import { logout } from "../redux/reducers/auth/action";
-import rootReducer from "../redux/rootReducer";
+import withReactContent from "sweetalert2-react-content";
+import Router from "next/router";
 const MySwal = withReactContent(Swal)
 
 const Error = ({ errorCode, errorMessage }) => {
@@ -130,19 +129,24 @@ const Error = ({ errorCode, errorMessage }) => {
 };
 
 function errorShow(errorCode, errorMessage) {
-    // if(errorCode === 401) {
-    //     const store = configureStore({
-    //         reducer: rootReducer,
-    //         middleware: [thunk]
-    //     })
-    //     const dispatch = store.dispatch
-    //     dispatch(logout)
-    // }
+    ifAccessDenial(errorCode)
     MySwal.fire({
         icon: 'error',
         title: errorCode,
         text: errorMessage
     })
+}
+
+function ifAccessDenial(errorCode){
+    const state = store.getState()
+    if(errorCode === `Access denied`) {
+        if(state.auth.isAuthenticated === false) return
+        else{
+            const userID = state.auth.user.userProfile.userID
+            store.dispatch(logout({userID:userID}))
+            Router.replace('/admin/login')
+        }
+    }
 }
 
 export default Error;

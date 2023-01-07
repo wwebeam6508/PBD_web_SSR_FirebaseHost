@@ -10,8 +10,6 @@ export const getWorksData = async (year) => {
     const workDoc = await getDocs(workQuery)
     let works = []
     workDoc.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data())
         const resdata = doc.data()
         const momentdate = moment(new Date(resdata.date.seconds * 1000)).add(543,'y').tz("Asia/Bangkok").format("DD-MM-YYYY")
         works.push({

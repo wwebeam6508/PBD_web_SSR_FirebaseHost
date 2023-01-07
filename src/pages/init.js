@@ -1,7 +1,7 @@
+import { useRouter } from "next/router"
 import React, { useEffect } from "react"
 import { store } from "../redux"
 import { setAuth } from "../redux/reducers/auth/slice"
-import useBeforeRender from "../util/useBeforeRender"
 
 export default function Init({ Component, pageProps }) {
 
