@@ -28,7 +28,7 @@ export default function Login(props) {
         } else {
             setIsLoaded(true)
         }
-    }, [router, stateAuth])
+    }, [stateAuth])
 
     if (!isLoaded) {
         return <></>

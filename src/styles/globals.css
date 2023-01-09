@@ -20,19 +20,13 @@ html,
 
 body {
   min-height: 100vh;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 .cover-container {
   max-width: 42em;
 }
 
-
-/*
- * Header
- */
-body {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-}
 
 .nav-masthead .nav-link {
   color: rgba(255, 255, 255, 1);
